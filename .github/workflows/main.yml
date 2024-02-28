@@ -11,21 +11,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag petitoff/myhugosite:${{ github.sha }}
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
         with:
-          hugo-version: 'latest'
-
-      - name: Build
-        run: hugo --minify
-
-      - name: Build and Push Docker Image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: user/my-hugo-site:latest
-
-      - name: Deploy
-        run: echo "Deploy step goes here"
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push the Docker image to Docker Hub
+        run: docker push myusername/myhugosite:${{ github.sha }}
