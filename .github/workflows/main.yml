@@ -12,7 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/myhugosite:${{ github.sha }}
+        run: | 
+          docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/myhugosite:${{ github.sha }}
+          docker tag ${{ secrets.DOCKER_USERNAME }}/myhugosite:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/myhugosite:latest
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
