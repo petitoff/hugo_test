@@ -1,0 +1,13 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'Up Business'
+theme = 'up-business-theme'
+
+
+[params]
+title = "Up Business"
+description = "We specialize in providing services to desing websites, applications, build and maintain business for customers."
+contact = [
+    "trungkienspktnd@gamail.com",
+    "207.555.0119"
+  ]
